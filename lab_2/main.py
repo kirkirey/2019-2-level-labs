@@ -71,3 +71,26 @@ def find_distance(original_word: str,
     matrix = initialize_edit_matrix(tuple(matrix), add_weight, remove_weight)
     matrix = fill_edit_matrix(tuple(matrix), add_weight, remove_weight, substitute_weight, original_word, target_word)
     return matrix[len(original_word)][len(target_word)]
+
+
+def save_to_csv(edit_matrix: tuple, path_to_file: str) -> None:
+    with open(path_to_file, 'w') as file:
+        for row_mat in edit_matrix:
+            row_doc = []
+            for i in row_mat:
+                row_doc += str(i)
+            row_doc = ','.join(row_doc)
+            file.write(row_doc + '\n')
+    return
+
+
+def load_from_csv(path_to_file: str) -> list:
+    matrix = []
+    with open(path_to_file, 'r') as file:
+        rows_doc = file.readlines()
+        for row_doc in rows_doc:
+            row_mat = []
+            for i in row_doc.split(','):
+                row_mat.append(int(i))
+            matrix.append(row_mat)
+    return list(matrix)
