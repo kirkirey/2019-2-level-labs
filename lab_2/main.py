@@ -16,36 +16,6 @@ def generate_edit_matrix(num_rows: int, num_cols: int) -> list:
         return matrix
 
 
-def initialize_edit_matrix2(edit_matrix: tuple, add_weight: int, remove_weight: int) -> list:
-    if type(edit_matrix) is list:
-        edit_matrix = tuple(edit_matrix)
-    if type(add_weight) is not int or type(remove_weight) is not int or edit_matrix is ():
-        return list(edit_matrix)
-    count = remove_weight
-    for i in edit_matrix:
-        i[0] = count
-        i.append(0)
-        count += remove_weight
-    first_row = tuple([[0]])
-    for i in range(len(edit_matrix[0]) - 1):
-        first_row[0].append(first_row[0][i] + add_weight)
-    matrix = first_row + edit_matrix
-    return list(matrix)
-
-
-def generate_edit_matrix2(num_rows: int, num_cols: int) -> list:
-    matrix = []
-    if type(num_rows) is not int or type(num_cols) is not int:
-        return matrix
-    else:
-        for i in range(num_rows + 1):
-            this_row = []
-            for j in range(num_cols + 1):
-                this_row.append(0)
-            matrix.append(this_row)
-        return matrix
-
-
 def initialize_edit_matrix(edit_matrix: tuple, add_weight: int, remove_weight: int) -> list:
     if type(edit_matrix) is list:
         edit_matrix = tuple(edit_matrix)
