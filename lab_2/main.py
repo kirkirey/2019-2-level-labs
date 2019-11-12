@@ -5,7 +5,7 @@ Labour work #2. Levenshtein distance.
 
 def generate_edit_matrix(num_rows: int, num_cols: int) -> list:
     matrix = []
-    if type(num_rows) is not int or type(num_cols) is not int:
+    if not isinstance(num_rows, int) or not isinstance (num_cols, int):
         return matrix
     else:
         for i in range(num_rows):
@@ -17,9 +17,9 @@ def generate_edit_matrix(num_rows: int, num_cols: int) -> list:
 
 
 def initialize_edit_matrix(edit_matrix: tuple, add_weight: int, remove_weight: int) -> list:
-    if type(edit_matrix) is list:
+    if isinstance(edit_matrix, list):
         edit_matrix = tuple(edit_matrix)
-    if type(add_weight) is not int or type(remove_weight) is not int or edit_matrix is () or [] in edit_matrix:
+    if not isinstance(add_weight, int) or not isinstance (remove_weight, int) or edit_matrix is () or [] in edit_matrix:
         return list(edit_matrix)
     count = 0
     for i in edit_matrix:  # заполнение первого столбца
@@ -31,11 +31,7 @@ def initialize_edit_matrix(edit_matrix: tuple, add_weight: int, remove_weight: i
 
 
 def minimum_value(numbers: tuple) -> int:
-    minimum = numbers[0]
-    for i in numbers:
-        if i < minimum:
-            minimum = i
-    return minimum
+    return min (numbers)
 
 
 def fill_edit_matrix(edit_matrix: tuple,
