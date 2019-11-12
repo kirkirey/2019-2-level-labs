@@ -40,8 +40,8 @@ def fill_edit_matrix(edit_matrix: tuple,
                      substitute_weight: int,
                      original_word: str,
                      target_word: str) -> list:
-    if type(add_weight) is not int or type(remove_weight) is not int or type(substitute_weight) is not int or type(
-            original_word) is not str or type(target_word) is not str:
+    if not isinstance (add_weight, int) or not isinstance(remove_weight, int) or not isinstance(substitute_weight, int) or not isinstance(
+            original_word, str) or not isinstance(target_word, str):
         return list(edit_matrix)
     for i in range(len(edit_matrix) - 1):  # строка:   edit_matrix[i]  элемент:    edit_matrix[i][j]
         for j in range(len(edit_matrix[i]) - 1):  # (len(*)-1) потому что я изменяю [i+1][j+1]
@@ -60,8 +60,8 @@ def find_distance(original_word: str,
                   add_weight: int,
                   remove_weight: int,
                   substitute_weight: int) -> int:
-    if type(add_weight) is not int or type(remove_weight) is not int or type(substitute_weight) is not int or type(
-            original_word) is not str or type(target_word) is not str:
+    if not isinstance(add_weight, int) or not isinstance (remove_weight, int) or not isinstance(substitute_weight, int) or not isinstance(
+            original_word, str) or isinstance(target_word, str):
         return -1
     matrix = generate_edit_matrix(len(original_word) + 1, len(target_word) + 1)
     matrix = initialize_edit_matrix(tuple(matrix), add_weight, remove_weight)
