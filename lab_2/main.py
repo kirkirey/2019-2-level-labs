@@ -39,7 +39,7 @@ def fill_edit_matrix(edit_matrix: tuple,
                      substitute_weight: int,
                      original_word: str,
                      target_word: str) -> list:
-    if not isinstancef(add_weight, int) or not isinstance(remove_weight, int) or not isinstance(substitute_weight, int) or not isinstance(
+    if not isinstance(add_weight, int) or not isinstance(remove_weight, int) or not isinstance(substitute_weight, int) or not isinstance(
             original_word, str) or not isinstance(target_word, str):
         return list(edit_matrix)
     for i in range(len(edit_matrix) - 1):  # строка:   edit_matrix[i]  элемент:    edit_matrix[i][j]
