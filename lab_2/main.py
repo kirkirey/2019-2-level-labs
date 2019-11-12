@@ -31,7 +31,7 @@ def initialize_edit_matrix(edit_matrix: tuple, add_weight: int, remove_weight: i
 
 
 def minimum_value(numbers: tuple) -> int:
-    return min (numbers)
+    return min(numbers)
 
 
 def fill_edit_matrix(edit_matrix: tuple,
@@ -60,14 +60,13 @@ def find_distance(original_word: str,
                   add_weight: int,
                   remove_weight: int,
                   substitute_weight: int) -> int:
-    if not isinstance(add_weight, int) or not isinstance (remove_weight, int) or not isinstance(substitute_weight, int) or not isinstance(
-            original_word, str) or isinstance(target_word, str):
+    if not isinstance(add_weight, int) or not isinstance(remove_weight, int) or not isinstance(substitute_weight, int) or not isinstance(
+            original_word, str) or not isinstance(target_word, str):
         return -1
     matrix = generate_edit_matrix(len(original_word) + 1, len(target_word) + 1)
     matrix = initialize_edit_matrix(tuple(matrix), add_weight, remove_weight)
     matrix = fill_edit_matrix(tuple(matrix), add_weight, remove_weight, substitute_weight, original_word, target_word)
     return matrix[len(original_word)][len(target_word)]
-
 
 def save_to_csv(edit_matrix: tuple, path_to_file: str) -> None:
     with open(path_to_file, 'w') as file:
