@@ -5,21 +5,20 @@ Labour work #2. Levenshtein distance.
 
 def generate_edit_matrix(num_rows: int, num_cols: int) -> list:
     matrix = []
-    if not isinstance(num_rows, int) or not isinstance (num_cols, int):
+    if not isinstance(num_rows, int) or not isinstance(num_cols, int):
         return matrix
-    else:
-        for i in range(num_rows):
-            this_row = []
-            for j in range(num_cols):
-                this_row.append(0)
-            matrix.append(this_row)
-        return matrix
+    for _ in range(num_rows):
+        this_row = []
+        for _ in range(num_cols):
+            this_row.append(0)
+        matrix.append(this_row)
+    return matrix
 
 
 def initialize_edit_matrix(edit_matrix: tuple, add_weight: int, remove_weight: int) -> list:
     if isinstance(edit_matrix, list):
         edit_matrix = tuple(edit_matrix)
-    if not isinstance(add_weight, int) or not isinstance (remove_weight, int) or edit_matrix is () or [] in edit_matrix:
+    if not isinstance(add_weight, int) or not isinstance(remove_weight, int) or edit_matrix is () or [] in edit_matrix:
         return list(edit_matrix)
     count = 0
     for i in edit_matrix:  # заполнение первого столбца
@@ -40,7 +39,7 @@ def fill_edit_matrix(edit_matrix: tuple,
                      substitute_weight: int,
                      original_word: str,
                      target_word: str) -> list:
-    if not isinstance (add_weight, int) or not isinstance(remove_weight, int) or not isinstance(substitute_weight, int) or not isinstance(
+    if not isinstancef(add_weight, int) or not isinstance(remove_weight, int) or not isinstance(substitute_weight, int) or not isinstance(
             original_word, str) or not isinstance(target_word, str):
         return list(edit_matrix)
     for i in range(len(edit_matrix) - 1):  # строка:   edit_matrix[i]  элемент:    edit_matrix[i][j]
@@ -76,7 +75,6 @@ def save_to_csv(edit_matrix: tuple, path_to_file: str) -> None:
                 row_doc += str(i)
             row_doc = ','.join(row_doc)
             file.write(row_doc + '\n')
-    return
 
 
 def load_from_csv(path_to_file: str) -> list:
