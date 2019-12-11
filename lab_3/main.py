@@ -127,6 +127,3 @@ def split_by_sentence(text: str) -> list:
             sentence = []
             sentence_text = ''
     return corpus
-
-
-string = 'Mar#y wa$nted, to swim! However, she was afraid of sharks.'
