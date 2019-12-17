@@ -71,6 +71,8 @@ class TfIdfCalculator:
         return self.tf_idf_values
 
     def report_on(self, word, document_index):
+        if not self.tf_idf_values or document_index >= len(self.corpus):
+            return ()
         try:
             tf_idf_value = self.tf_idf_values[document_index][word]
         except TypeError:
