@@ -80,7 +80,7 @@ class TfIdfCalculator:
             tf_idf_value = self.tf_idf_values[document_index][word]
         except TypeError:
             return ()
-        whew = sorted(self.tf_idf_values[document_index], key=lambda a: int(self.tf_idf_values[document_index][a]),
+        whew = sorted(self.tf_idf_values[document_index], key=lambda a: self.tf_idf_values[document_index][a],
                       reverse=True)
         return tf_idf_value, whew.index(word)
 
