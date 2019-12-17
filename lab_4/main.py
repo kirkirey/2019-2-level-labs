@@ -5,13 +5,16 @@ REFERENCE_TEXTS = []
 
 def clean_tokenize_corpus(texts: list) -> list:
     corpus = []
+    if not isinstance(texts,list):
+        return corpus
     for text in texts:
         text_source = ''
         corpus_source = []
         if not isinstance(text, str):
-            corpus.append([])
+            break
         else:
             text = text.lower().replace('\n', ' ')
+            text = text.replace('<br />', ' ')
         for letter in text:
             if letter.isalpha() or letter is ' ':
                 text_source += letter
