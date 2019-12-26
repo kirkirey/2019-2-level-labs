@@ -11,7 +11,7 @@ def clean_tokenize_corpus(texts: list) -> list:
         text_source = ''
         corpus_source = []
         if not isinstance(text, str):
-            break
+            continue # скип
         else:
             text = text.lower().replace('\n', ' ')
             text = text.replace('<br />', ' ')
@@ -36,32 +36,36 @@ class TfIdfCalculator:
     def calculate_tf(self):
         if self.corpus:
             for text in self.corpus:
-                if not isinstance(text, list):
-                    continue  # скип
-                tf_value = {}
+                if not text or not isinstance(text, list):
+                    continue
+                tf_values = {}
+                valid_words = len(text)
                 for word in text:
-                    if not isinstance(word, str):
-                        continue  # скип
-                    if word not in tf_value:
-                        tf_value[word] = text.count(word) / len(text)
-                self.tf_values.append(tf_value)
+                    if not word or not isinstance(word, str):
+                        valid_words -= 1
+                for word in text:
+                    if isinstance(word, str) and word not in tf_values:
+                        tf_values[word] = text.count(word) / valid_words
+                self.tf_values.append(tf_values)
         return self.tf_values
 
     def calculate_idf(self):
         if self.corpus:
+            valid_texts = len(self.corpus)
             for text in self.corpus:
-                if not isinstance(text, list):
+                if not text or not isinstance(text, list):
+                    valid_texts -= 1
                     continue  # скип
                 for word in text:
-                    if not isinstance(word, str):
+                    if not word or not isinstance(word, str):
                         continue  # скип
                     word_freq_in_corpus = 0
                     for text_2 in self.corpus:
-                        if not isinstance(text_2, list):
+                        if not text or not isinstance(text_2, list):
                             continue  # скип
                         if word in text_2:
                             word_freq_in_corpus += 1
-                    self.idf_values[word] = math.log(len(self.corpus) / word_freq_in_corpus)
+                    self.idf_values[word] = math.log(valid_texts / word_freq_in_corpus)
         return self.idf_values
 
     def calculate(self):
@@ -80,7 +84,7 @@ class TfIdfCalculator:
             tf_idf_value = self.tf_idf_values[document_index][word]
         except TypeError:
             return ()
-        whew = sorted(self.tf_idf_values[document_index], key=lambda a: self.tf_idf_values[document_index][a],
+        whew = sorted(self.tf_idf_values[document_index], key=lambda a: int(self.tf_idf_values[document_index][a]),
                       reverse=True)
         return tf_idf_value, whew.index(word)
 
